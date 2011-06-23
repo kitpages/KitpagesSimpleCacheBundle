@@ -69,6 +69,7 @@ class CacheManager
         // check
         $data = $this->_execute($callback, $params);
         $cache = new Backend();
+        $cache->setId($id);
         $cache->setData($cache);
         $expiredAt = $this->_calculateExpiredAt($expiration);
         $cache->setExpiredAt($expiredAt);
