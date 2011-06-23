@@ -58,7 +58,7 @@ class CacheManager
                 $cache->setData($cache);
                 $expiredAt = $this->_calculateExpiredAt($expiration);
                 $cache->setExpiredAt($expiredAt);
-                $em->persist($rule);
+                $em->persist($cache);
                 $em->flush();
                 return $data;
             }
@@ -72,7 +72,7 @@ class CacheManager
         $cache->setData($cache);
         $expiredAt = $this->_calculateExpiredAt($expiration);
         $cache->setExpiredAt($expiredAt);
-        $em->persist($rule);
+        $em->persist($cache);
         $em->flush();
         return $data;
     }
