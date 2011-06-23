@@ -55,7 +55,7 @@ class CacheManager
             $expiredAt = $cache->getExpiredAt();
             if ( ($expiredAt instanceof \DateTime) && ($cache->getExpiredAt() < $now) ) {
                 $data = $this->_execute($callback, $params);
-                $cache->setData($cache);
+                $cache->setData($data);
                 $expiredAt = $this->_calculateExpiredAt($expiration);
                 $cache->setExpiredAt($expiredAt);
                 $em->persist($cache);
@@ -70,7 +70,7 @@ class CacheManager
         $data = $this->_execute($callback, $params);
         $cache = new Backend();
         $cache->setId($id);
-        $cache->setData($cache);
+        $cache->setData($data);
         $expiredAt = $this->_calculateExpiredAt($expiration);
         $cache->setExpiredAt($expiredAt);
         $em->persist($cache);
