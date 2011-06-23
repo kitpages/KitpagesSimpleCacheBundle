@@ -29,20 +29,22 @@ class CacheManager
         return $this->_doctrine;
     }
     
+    /**
+     * clear cache
+     * @param string $id cache id, comparison with like and % if you want
+     */
     public function clear($id)
     {
         $em = $this->getDoctrine()->getEntityManager();
         // check if $id exists in cache
         $query = $em->createQuery("
             SELECT backend FROM KitpagesSimpleCacheBundle:Backend backend
-            WHERE backend.id = :backendId
+            WHERE backend.id like :backendId
         ")->setParameter('backendId', $id);
         $backendList = $query->getResult();
-        $cache = null;
-        if (count($backendList) == 1 ) {
-            $cache = $backendList[0];
+        foreach ($backendList as $backend) {
+            $em->remove($backend);
         }
-        $em->remove($cache);
         $em->flush();
     }
     
