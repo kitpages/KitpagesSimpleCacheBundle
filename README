@@ -17,6 +17,18 @@ add vendors/ in the app/autoload.php
 
 add the new Bundle in app/appKernel.php
 
+You need to create a table in the database :
+CREATE TABLE `simple_cache_backend` (
+  `id` varchar(255) NOT NULL,
+  `data` longtext COMMENT '(DC2Type:array)',
+  `created_at` datetime NOT NULL,
+  `updated_at` datetime NOT NULL,
+  `expired_at` datetime default NULL,
+  PRIMARY KEY  (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8
+
+(or you can use php app/console doctrine:schema:update)
+
 Users Guide
 ===========
 
