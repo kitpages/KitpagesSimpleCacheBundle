@@ -1,7 +1,7 @@
 KitpagesSimpleCacheBundle
 =========================
 
-very simple cache system for symfony2
+very simple cache system for symfony2 in database
 
 author : Philippe Le Van (@plv)
 http://www.kitpages.fr/sf2-bundle-kitpages-simple-cache.php
