@@ -6,3 +6,52 @@ very simple cache system for symfony2
 author : Philippe Le Van (@plv)
 http://www.kitpages.fr/sf2-bundle-kitpages-simple-cache.php
 
+
+Installation
+============
+hum... as usual...
+
+put the code in vendors/Kitpages/SimpleCacheBundle
+
+add vendors/ in the app/autoload.php
+
+add the new Bundle in app/appKernel.php
+
+Users Guide
+===========
+
+1/ record & retrieve into/from the cache
+-----------------------------------------
+$cacheManager = $this->get('kitpages.simple_cache');
+$html = $cacheManager->get(
+    'my-cache-uniq-id-12',
+    function() {
+        $output = "hello world";
+        sleep (3);
+        return $output;
+    }
+);
+
+2/ clear the cache
+-------------------
+$cacheManager = $this->get('kitpages.simple_cache');
+$cacheManager->clear('my-cache-uniq-id-12');
+
+3/ a more complex example : arguments given to the callback and expiration
+---------------------------------------------------------------------------
+$html = $cacheManager->get(
+    'my-cache-uniq-id-12',
+    function($arg1, $arg2) {
+        $output = "hello world";
+        sleep (3);
+        return $output;
+    },
+    array(12, 34),
+    $myExpirationTimeInSeconds
+);
+
+4/ multiple delete in the cache
+--------------------------------
+$cacheManager = $this->get('kitpages.simple_cache');
+$cacheManager->clear('my-cache-%');
+// remove all the entries in the cache beginning by "my-cache-"
