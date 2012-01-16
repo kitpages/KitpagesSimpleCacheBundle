@@ -5,7 +5,7 @@ Very simple cache system for symfony2. The cache data are saved in one table in
 database.
 
 author : Philippe Le Van (@plv)
-http://www.kitpages.fr/sf2-bundle-kitpages-simple-cache.php
+http://www.kitpages.fr/fr/cms/102/kitpagessimplecachebundle
 
 
 Installation
