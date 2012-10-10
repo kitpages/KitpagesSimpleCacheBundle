@@ -1,7 +1,7 @@
 <?php
 namespace Kitpages\SimpleCacheBundle\Model;
 
-use Symfony\Bundle\DoctrineBundle\Registry;
+use Doctrine\Bundle\DoctrineBundle\Registry;
 use Kitpages\SimpleCacheBundle\Entity\Backend;
 
 class CacheManager
