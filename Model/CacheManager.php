@@ -35,7 +35,7 @@ class CacheManager
      */
     public function clear($id)
     {
-        $em = $this->getDoctrine()->getEntityManager();
+        $em = $this->getDoctrine()->getManager();
         // check if $id exists in cache
         $query = $em->createQuery("
             SELECT backend FROM KitpagesSimpleCacheBundle:Backend backend
@@ -56,7 +56,7 @@ class CacheManager
      */
     public function get($id, $callback, $params = array(), $expiration = null)
     {
-        $em = $this->getDoctrine()->getEntityManager();
+        $em = $this->getDoctrine()->getManager();
         // check if $id exists in cache
         $query = $em->createQuery("
             SELECT backend FROM KitpagesSimpleCacheBundle:Backend backend
