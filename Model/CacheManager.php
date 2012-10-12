@@ -114,6 +114,6 @@ class CacheManager
             $interval = new \DateInterval('P'.$time.'s');
             return $now->add($interval);
         }
-        throw new Exception('unknown parameter type. expiration time shoud be a int in seconds or a DateInterval');
+        throw new \Exception('unknown parameter type. expiration time shoud be a int in seconds or a DateInterval');
     }
 }
