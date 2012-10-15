@@ -25,7 +25,8 @@ class CacheManager
      *
      * @return Registry
      */
-    protected function getDoctrine() {
+    protected function getDoctrine() 
+    {
         return $this->_doctrine;
     }
     
