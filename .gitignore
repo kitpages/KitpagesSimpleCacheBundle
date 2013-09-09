@@ -1,3 +1,5 @@
 Resources/doc/_build/
-
+.idea/*
+vendor/*
+composer.lock
 Entity/*~

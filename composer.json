@@ -1,7 +1,7 @@
 {
     "name": "kitpages/simple-cache-bundle",
     "description": "Very simple cache system for symfony2. The cache data are saved in one table in database.",
-    "keywords": ["cache"],
+    "keywords": ["cache", "doctrine"],
     "homepage": "http://github.com/kitpages/KitpagesSimpleCacheBundle",
     "type": "symfony-bundle",
     "license": "BSD",
@@ -12,10 +12,17 @@
         }
     ],
     "require": {
-        "symfony/framework-bundle": "2.1.*",
-        "doctrine/orm": ">=2.1.0"
+        "symfony/framework-bundle": "~2.1",
+        "doctrine/orm": "~2.1"
+    },
+    "require-dev": {
+        "symfony/class-loader": "~2.1",
+        "symfony/yaml": "~2.1",
+        "symfony/finder": "~2.1",
+        "beberlei/DoctrineExtensions": "dev-master"
     },
     "autoload": {
         "psr-0": { "Kitpages\\SimpleCacheBundle": "" }
-    }
+    },
+    "target-dir": "Kitpages/SimpleCacheBundle"
 }
