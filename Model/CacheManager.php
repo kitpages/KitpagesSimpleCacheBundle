@@ -1,52 +1,42 @@
 <?php
 namespace Kitpages\SimpleCacheBundle\Model;
 
-use Symfony\Bundle\DoctrineBundle\Registry;
+use Doctrine\ORM\EntityManager;
 use Kitpages\SimpleCacheBundle\Entity\Backend;
 
 class CacheManager
 {
-    protected $_doctrine = null;
+    /** @var EntityManager */
+    protected $em;
     protected $_expirationTime = null;
     
     /**
      *
-     * @param Registry $doctrine
+     * @param EntityManager $em
      * @param int $expirationTime in seconds
      */
-    public function __construct($doctrine, $expirationTime)
+    public function __construct($em, $expirationTime)
     {
-        $this->_doctrine = $doctrine;
+        $this->em = $em;
         $this->_expirationTime = $expirationTime;
     }
-    
-    /**
-     * Shortcut to return the Doctrine Registry service.
-     *
-     * @return Registry
-     */
-    protected function getDoctrine() 
-    {
-        return $this->_doctrine;
-    }
-    
+
     /**
      * clear cache
      * @param string $id cache id, comparison with like and % if you want
      */
     public function clear($id)
     {
-        $em = $this->getDoctrine()->getEntityManager();
         // check if $id exists in cache
-        $query = $em->createQuery("
-            SELECT backend FROM KitpagesSimpleCacheBundle:Backend backend
+        $query = $this->em->createQuery("
+            SELECT backend FROM Kitpages\SimpleCacheBundle\Entity\Backend backend
             WHERE backend.id like :backendId
         ")->setParameter('backendId', $id);
         $backendList = $query->getResult();
         foreach ($backendList as $backend) {
-            $em->remove($backend);
+            $this->em->remove($backend);
         }
-        $em->flush();
+        $this->em->flush();
     }
     
     /**
@@ -57,10 +47,9 @@ class CacheManager
      */
     public function get($id, $callback, $params = array(), $expiration = null)
     {
-        $em = $this->getDoctrine()->getEntityManager();
         // check if $id exists in cache
-        $query = $em->createQuery("
-            SELECT backend FROM KitpagesSimpleCacheBundle:Backend backend
+        $query = $this->em->createQuery("
+            SELECT backend FROM Kitpages\SimpleCacheBundle\Entity\Backend backend
             WHERE backend.id = :backendId
         ")->setParameter('backendId', $id);
         $backendList = $query->getResult();
@@ -78,8 +67,8 @@ class CacheManager
                 $cache->setData($data);
                 $expiredAt = $this->_calculateExpiredAt($expiration);
                 $cache->setExpiredAt($expiredAt);
-                $em->persist($cache);
-                $em->flush();
+                $this->em->persist($cache);
+                $this->em->flush();
                 return $data;
             }
             // cache ok
@@ -93,8 +82,8 @@ class CacheManager
         $cache->setData($data);
         $expiredAt = $this->_calculateExpiredAt($expiration);
         $cache->setExpiredAt($expiredAt);
-        $em->persist($cache);
-        $em->flush();
+        $this->em->persist($cache);
+        $this->em->flush();
         return $data;
     }
     
