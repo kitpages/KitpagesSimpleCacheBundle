@@ -4,7 +4,7 @@
     "keywords": ["cache", "doctrine"],
     "homepage": "http://github.com/kitpages/KitpagesSimpleCacheBundle",
     "type": "symfony-bundle",
-    "license": "BSD",
+    "license": "MIT",
     "authors": [
         {
             "name": "Philippe Le Van",
